@@ -185,6 +185,49 @@ function restartAutoplayTimer() {
         startAutoplay();
     }
 }
+//this is when user hovers through teh product it will pasue and the progress bar will start again when user leaver the mousefrom the product
+const previewImages = document.getElementsByClassName('thumbnail');
+
+for (let i = 0; i < previewImages.length; i++) {
+    const previewImage = previewImages[i];
+    
+    previewImage.addEventListener('mouseenter', function () {
+        pauseAutoplay();
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
+        progressBar.setAttribute('aria-valuenow', '0');
+    });
+    
+    previewImage.addEventListener('mouseleave', function () {
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
+        progressBar.setAttribute('aria-valuenow', '0');
+        
+        timerStartTime = Date.now();
+        timeRemaining = autoplayDelay;
+        
+        progressFill.style.transition = `width ${timeRemaining}ms linear`;
+        progressFill.style.width = '100%';
+        
+        timer = setTimeout(function () {
+            timer = null;
+            timeRemaining = autoplayDelay;
+            
+            progressFill.style.transition = 'none';
+            progressFill.style.width = '0%';
+            progressBar.setAttribute('aria-valuenow', '0');
+            
+            moveToNextCard();
+            
+            progressFill.style.transition = `width ${timeRemaining}ms linear`;
+            progressFill.style.width = '100%';
+            
+            progressBar.setAttribute('aria-valuenow', String(autoplayDelay - timeRemaining));
+            
+            timerStartTime = Date.now();
+        }, timeRemaining);
+    });
+}
 
 // this function handles the clicks
 document.addEventListener('click', function (event) {
