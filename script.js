@@ -6,7 +6,7 @@ const objectArray = [
     { name: 'shoes',
          image:'images/shoes2.webp', originalPrice: '1999',
           price: '1399' },
-    { name: 'Necklace', image: '	images/necklaace.webp', originalPrice: '50000', price: '28999' },
+    { name: 'Necklace', image:'images/necklaace.webp', originalPrice: '50000', price: '28999' },
     { name: 'badminton', image: 'images/badminton.webp',
          originalPrice: '1599', price: '899' },
     { name: 'water bottle', image: 'images/water bottle.webp',
